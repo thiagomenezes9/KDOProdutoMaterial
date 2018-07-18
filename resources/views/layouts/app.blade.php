@@ -28,9 +28,19 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-header-primary">
-                                <h4 class="card-title">@yield('cardTitle')</h4>
-                                <p class="card-category">@yield('cardContent')</p>
+                                <div class="row">
+                                    <div class="left col-md-11">
+                                        <h4 class="card-title">@yield('cardTitle')</h4>
+                                        <p class="card-category">@yield('cardContent')</p>
+                                    </div>
+
+                                    @yield('cardButton')
+
+
+                                </div>
+
                             </div>
+
                             <div class="card-body">
 
                                 @yield('content')

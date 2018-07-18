@@ -4,6 +4,7 @@ Route::get('/', array('as' => 'auth.index', 'uses' => 'AuthController@index'));
 
 
 
+
 Route::group(['middleware'=>['web']],function(){
     Route::group(['prefix' => 'auth'], function (){
 
