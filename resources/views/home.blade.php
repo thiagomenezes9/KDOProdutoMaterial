@@ -26,21 +26,38 @@
 
 
 
-            <div class="info-box">
-                <a href="{{route('busca.show',$oferta->produto->id)}}">
-                                                <span class="info-box-icon"><img src="{{$oferta->produto->foto}}"
-                                                                                 alt="Product Image"
-                                                                                 class="imagem"></span>
-                </a>
-                <div class="info-box-content">
-                    <span class="info-box-text">{{$oferta->produto->descricao}}</span>
-                    <span class="info-box-number">R$ {{$oferta->valor}}</span>
-                    <span class="info-box-text"><small>{{$oferta->supermercado->nome}}</small></span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
+            <ul class="products-list product-list-in-box">
 
+
+                <li class="item">
+                    <div class="product-img">
+                        <img src="{{$oferta->produto->foto}}" alt="Product Image">
+                    </div>
+                    <div class="product-info">
+                        <a href="{{route('busca.show',$oferta->produto->id)}}"
+                           class="product-title">{{$oferta->produto->descricao}}
+
+
+                            <span class="label label-success pull-right">Valor da Oferta R$ {{$oferta->valor}}</span></a>
+                        <span class="product-description">
+                                              {{$oferta->produto->marca->descricao}}
+                                             </span>
+
+                        <strong><span class="product-description">
+                                              {{$oferta->supermercado->nome}}
+                                             </span></strong>
+
+
+                        <strong><span class="product-description">
+                                              Oferta valida até {{\Carbon\Carbon::parse($oferta->dt_fim)->format('d/m/Y')}}
+                                             </span></strong>
+
+
+                    </div>
+                </li>
+
+
+            </ul>
 
 
 

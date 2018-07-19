@@ -2,12 +2,14 @@
 
 namespace App;
 
+use App\Notifications\ResetSenhaNotificacao;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','dt_nasc','foto','cpf','telefone','ativo','tipo','sexo','cidade_id','supermercado_id'
     ];
 
     /**
@@ -26,4 +28,35 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function cidade(){
+        return $this->belongsTo('App\Cidade','cidade_id');
+    }
+
+    public function supermercado(){
+        return $this->belongsTo('App\Supermercado');
+    }
+
+
+    public function interesse(){
+        return $this->hasMany('App\Interesse','user_id');
+
+    }
+
+    public function acesso(){
+        return $this->hasMany('App\Acesso','user_id');
+    }
+
+
+
+    public function termo(){
+        return $this->hasMany('App\Termo','user_id');
+    }
+
+
+    public function sendPasswordResetNotification($token){
+        $this->notify(new ResetSenhaNotificacao($token));
+    }
+
 }

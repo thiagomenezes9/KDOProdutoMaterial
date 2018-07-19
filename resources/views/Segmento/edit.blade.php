@@ -32,29 +32,27 @@
 @section('content')
 
     @if($errors->any())
-        <div class="box alert alert-danger">
-            <div class="box-header with-border">
-                <h3 class="box-title text-gray">Opss! Alguma coisa errada</h3>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
 
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool"
-                            data-widget="remove" data-toggle="tooltip" title="Fechar">
-                        <i class="fa fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="box-body">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+
+
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+
+
+
+
+
 
         </div>
     @endif
-
-
 
                         <form class="form-horizontal" action="{{route('segmentos.update',$segmento->id)}}" method="post" enctype="multipart/form-data">
 

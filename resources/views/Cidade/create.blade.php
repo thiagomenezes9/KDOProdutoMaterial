@@ -38,7 +38,7 @@ Preencha todos os campos
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool"
-                            data-widget="remove" data-toggle="tooltip" title="Fechar">
+                            data-dismiss="alert" title="Fechar">
                         <i class="fa fa-times"></i>
                     </button>
                 </div>

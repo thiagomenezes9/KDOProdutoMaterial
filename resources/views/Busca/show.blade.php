@@ -21,44 +21,39 @@
 
 
 
-    <div align="right">
-        <div class="row">
+    <div align="left">
+        <p style="display: none">{{$valida = '0'}}</p>
 
-            <p style="display: none">{{$valida = '0'}}</p>
+        @foreach(Auth::user()->interesse as $interesse)
 
-            @foreach(Auth::user()->interesse as $interesse)
+            @if($interesse->produto == $produto)
 
-                @if($interesse->produto == $produto)
+                <p style="display: none">{{$valida = '1'}}</p>
 
-                    <p style="display: none">{{$valida = '1'}}</p>
-
-                    <div align="right" class="col col-lg-2"><a href="{{route('InteresseRemover',$interesse->id)}}"
-                                                               class="btn btn-danger
-">Deixar</a></div>
-
+                <a href="{{route('InteresseRemover',$interesse->id)}}"
+                   class="btn btn-just-icon btn-white btn-fab btn-round">
+                    <i class="material-icons">close</i>
+                </a>
 
 
-                @endif
 
-            @endforeach
-
-            @if($valida == '0')
-                <a href="{{route('InteresseAdicionar',$produto)}}"
-                                                           class="btn btn-info">Interesse</a>
             @endif
 
-            <div align="left" class="col col-lg-2">
-                <a href="javascript:history.back()" class="btn btn-just-icon btn-white btn-fab btn-round">
-                    <i class="material-icons">arrow_back</i>
-                </a>
-            </div>
+        @endforeach
 
-        </div>
+        @if($valida == '0')
+            <a href="{{route('InteresseAdicionar',$produto)}}" class="btn btn-just-icon btn-white btn-fab btn-round">
+                <i class="material-icons">add</i>
+            </a>
+        @endif
 
+
+        <a href="javascript:history.back()" class="btn btn-just-icon btn-white btn-fab btn-round">
+            <i class="material-icons">arrow_back</i>
+        </a>
 
 
     </div>
-
 
 
 @endsection
@@ -69,64 +64,66 @@
 
 
 
+    <div class="row">
 
-
-            <img src="{{$produto->foto}}" width="250px" height="250px" id="imagem" class="col-md-4">
-
-            <p><strong><h2>Produto : {{$produto->descricao}}</h2></strong></p>
+        <div class="col-md-3">
+            <img src="{{$produto->foto}}" width="250px" height="250px" id="imagem">
+        </div>
+        <div class="col-md-9">
+            <h2><strong>Produto : {{$produto->descricao}}</strong></h2>
             <br>
             <p><strong>Código de Barras : </strong> {{$produto->cd_barras}}</p><br>
             <p><strong>Marca : </strong> {{$produto->marca->descricao}}</p><br>
             <p><strong>Categoria : </strong> {{$produto->categoria->descricao}}</p><br>
+        </div>
+    </div>
+    {{-- <p><strong>Imagem : </strong></p><br>--}}
 
 
-            {{-- <p><strong>Imagem : </strong></p><br>--}}
+    <br><br><br><br>
+    <h3><strong>Preços</strong></h3>
+
+    <table class="table table-hover" id="tabPrecos">
+        <thead>
+        <tr>
+            <th><strong>Estabelecimento</strong></th>
+            <th><strong>Valor</strong></th>
+            <th class="text-right"><strong>Preço</strong></th>
+        </tr>
+        </thead>
 
 
-            <br><br><br><br>
-            <h3><strong>Preços</strong></h3>
+        <tbody>
+        @foreach($produto->preco as $preco)
 
-            <table class="table table-hover" id="tabPrecos">
-                <thead>
-                <tr>
-                    <th class="col-md-6"><strong>Estabelecimento</strong></th>
-                    <th align="center"><strong>Valor</strong></th>
-                    <th align="center"><strong>Preço</strong></th>
-                </tr>
-                </thead>
-
-
-                <tbody>
-                @foreach($produto->preco as $preco)
-
-                    <p style="display: none">{{$numOferta = 0}}</p>
-                    @foreach($produto->oferta as $oferta)
-                        @if($oferta->supermercado == $preco->supermercado)
-                            @if($oferta->dt_fim >= \Carbon\Carbon::now() && $oferta->dt_ini <= \Carbon\Carbon::now())
-                                <tr style="background-color: #3f729b" align="center">
-                                    <td align="left">{{ $oferta->supermercado->nome }}</td>
-                                    <td align="right">{{ 'R$'. $oferta->valor}}</td>
-                                    <td align="left">{{'Oferta até '.\Carbon\Carbon::parse($oferta->dt_fim)->format('d/m/Y')}}</td>
-
-                                </tr>
-                                <p style="display: none">{{$numOferta = $numOferta + 1}}</p>
-                            @endif
-                        @endif
-                    @endforeach
-                    @if($numOferta == 0)
-
-                        <tr align="center">
-                            <td align="left">{{ $preco->supermercado->nome }}</td>
-                            <td align="right">{{ 'R$'. $preco->valor}}</td>
-                            <td align="left">{{'Desde de '.\Carbon\Carbon::parse($preco->created_at)->format('d/m/Y')}}</td>
-
+            <p style="display: none">{{$numOferta = 0}}</p>
+            @foreach($produto->oferta as $oferta)
+                @if($oferta->supermercado == $preco->supermercado)
+                    @if($oferta->dt_fim >= \Carbon\Carbon::now() && $oferta->dt_ini <= \Carbon\Carbon::now())
+                        <tr style="background-color: #a3d7a5" align="center">
+                            <td align="left">{{ $oferta->supermercado->nome }}</td>
+                            <td align="center">{{ 'R$'. $oferta->valor}}</td>
+                            <td class="td-actions text-right">{{'Oferta até '.\Carbon\Carbon::parse($oferta->dt_fim)->format('d/m/Y')}}</td>
 
                         </tr>
-
+                        <p style="display: none">{{$numOferta = $numOferta + 1}}</p>
                     @endif
-                @endforeach
-                </tbody>
-            </table>
+                @endif
+            @endforeach
+            @if($numOferta == 0)
+
+                <tr align="center">
+                    <td align="left">{{ $preco->supermercado->nome }}</td>
+                    <td align="center">{{ 'R$'. $preco->valor}}</td>
+                    <td class="td-actions text-right">{{'Desde de '.\Carbon\Carbon::parse($preco->created_at)->format('d/m/Y')}}</td>
+
+
+                </tr>
+
+            @endif
+        @endforeach
+        </tbody>
+    </table>
 
 
 

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Cidade;
 use App\Estado;
+use App\Interesse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AjaxController extends Controller
 {
@@ -24,5 +26,35 @@ class AjaxController extends Controller
         $cidades = Cidade::all();
         return response()->json(json_encode($cidades));
     }
+
+
+    public function adicionar($produto){
+
+        $interesse = new Interesse();
+
+        $interesse->produto()->associate($produto);
+        $interesse->user()->associate(Auth::user());
+
+        $interesse->save();
+
+        return response()->json('adicionou');
+
+    }
+
+    public function remover($id){
+
+        $interesse = Interesse::find($id);
+
+
+
+        $interesse->delete();
+
+
+        return response()->json('removeu');
+
+
+
+    }
+
 
 }

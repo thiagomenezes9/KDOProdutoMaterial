@@ -27,9 +27,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="card-header card-header-primary">
+                            <div class="card-header card-header-success">
                                 <div class="row">
-                                    <div class="left col-md-11">
+                                    <div class="left col-md-10">
                                         <h4 class="card-title">@yield('cardTitle')</h4>
                                         <p class="card-category">@yield('cardContent')</p>
                                     </div>
