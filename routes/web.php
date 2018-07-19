@@ -2,6 +2,10 @@
 
 Route::get('/', array('as' => 'auth.index', 'uses' => 'AuthController@index'));
 
+Route::get('/home',array('as' => 'home', 'uses' => 'DashboardController@index'));
+
+
+
 
 
 
@@ -60,6 +64,9 @@ Route::group(['middleware'=>['web']],function(){
     Route::resource('ofertas','OfertaController');
     Route::resource('busca','BuscaController');
     Route::resource('interesse','InteresseController');
+    Route::resource('acesso','AcessoController');
+
+
 
 
     Route::get('interesse/remover/{id}','InteresseController@remover')->name('InteresseRemover');

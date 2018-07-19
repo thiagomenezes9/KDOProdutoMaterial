@@ -1,35 +1,29 @@
 @extends('layouts.app')
 
 @section('htmlheader_title')
-    Produtos
-@stop
+Busca
+@endsection
 
-@section('contentheader_title')
+@section('menu_titulo')
+Busca
+@endsection
 
-@stop
+@section('cardTitle')
+Busca
+@endsection
 
-@section('contentheader_description')
-    Lista dos Produtos
-@stop
+@section('cardContent')
+Listagem dos produtos encontrados
 
+@endsection
 
-@section('main-content')
-
-    <div class="container-fluid spark-screen">
-        <div class="row">
-
-            <div class="col-md-12">
-
-                <div class="box">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Pesquisa</h3>
+@section('cardButton')
 
 
+@endsection
 
+@section('content')
 
-                    </div>
-
-                    <div class="box-body" id="pagination">
 
 
                         @forelse($produtos as $produto)
@@ -146,20 +140,6 @@
                         @endforelse
 
 
-
-
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-@endsection
-
-@section('scriptlocal')
 
 
 

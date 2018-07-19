@@ -1,32 +1,31 @@
 @extends('layouts.app')
 
 @section('htmlheader_title')
-    Interesses
-@stop
+Interesse
+@endsection
 
-@section('contentheader_title')
+@section('menu_titulo')
+Interesse
+@endsection
 
-@stop
+@section('cardTitle')
+Interesse
+@endsection
 
-@section('contentheader_description')
-    Lista dos Interesses
-@stop
+@section('cardContent')
+Lista dos produtos com Interesse
+
+@endsection
+
+@section('cardButton')
 
 
-@section('main-content')
 
-    <div class="container-fluid spark-screen">
-        <div class="row">
+@endsection
 
-            <div class="col-md-12">
+@section('content')
 
-                <div class="box">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Interesses</h3>
 
-                    </div>
-
-                    <div class="box-body">
 
 
                         @foreach($interesses as $interesse)
@@ -128,17 +127,6 @@
 
                         @endforeach
 
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-@endsection
-
-@section('scriptlocal')
 
 
 

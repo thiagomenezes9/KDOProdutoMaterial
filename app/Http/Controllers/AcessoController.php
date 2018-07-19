@@ -16,7 +16,11 @@ class AcessoController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+        $acessos = Acesso::all()->where('user_id','=',$user->id);
+
+        return view('Acesso.index',compact('acessos'));
     }
 
     /**

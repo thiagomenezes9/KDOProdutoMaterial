@@ -25,15 +25,21 @@
 
 
 
-            <a href="{{route('busca.show',$oferta->produto->id)}}">
+
+            <div class="info-box">
+                <a href="{{route('busca.show',$oferta->produto->id)}}">
                                                 <span class="info-box-icon"><img src="{{$oferta->produto->foto}}"
                                                                                  alt="Product Image"
                                                                                  class="imagem"></span>
-            </a>
-
-            <span class="info-box-text">{{$oferta->produto->descricao}}</span>
-            <span class="info-box-number">R$ {{$oferta->valor}}</span>
-            <span class="info-box-text"><small>{{$oferta->supermercado->nome}}</small></span>
+                </a>
+                <div class="info-box-content">
+                    <span class="info-box-text">{{$oferta->produto->descricao}}</span>
+                    <span class="info-box-number">R$ {{$oferta->valor}}</span>
+                    <span class="info-box-text"><small>{{$oferta->supermercado->nome}}</small></span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
 
 
 
