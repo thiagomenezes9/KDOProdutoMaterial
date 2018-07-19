@@ -1,25 +1,28 @@
 @extends('layouts.app')
 
 @section('htmlheader_title')
-    Marca
+    Paises
 @endsection
 
 @section('menu_titulo')
-    Marca
+    Paises
 @endsection
 
 @section('cardTitle')
-    Marcas
+    Paises
 @endsection
 
 @section('cardContent')
-    Listagem das Marcas
+    Listagem dos Paises
+
 @endsection
 
 @section('cardButton')
 
-    <div align="right" >
-        <a href="{{route('marcas.create')}}" class="btn btn-just-icon btn-white btn-fab btn-round">
+
+
+    <div align="right">
+        <a href="{{route('pais.create')}}" class="btn btn-just-icon btn-white btn-fab btn-round">
             <i class="material-icons">add</i>
         </a>
     </div>
@@ -27,36 +30,40 @@
 @endsection
 
 @section('content')
-    <table class="table table-striped table-no-bordered table-hover" id="tabMarcas">
+
+
+
+
+    <table class="table table-striped table-no-bordered table-hover" id="tabPaises">
         <thead>
         <tr>
-            <th><strong>Descrição</strong></th>
+            <th><strong>Nome</strong></th>
             <th class="disabled-sorting text-right"><strong>Ações</strong></th>
         </tr>
         </thead>
 
 
         <tbody>
-        @foreach($marcas as $m)
+        @foreach($paises as $p)
             <tr>
-                <td align="left">{{ $m->descricao }}</td>
+                <td align="left">{{ $p->nome }}</td>
                 <td class="td-actions text-right">
-                    <a  href="{{route('marcas.show',$m->id)}}" >
+                    <a href="{{route('pais.show',$p->id)}}">
                         <i class="material-icons">search</i>
 
                     </a>
 
-                    <a   href="{{route('marcas.edit',$m->id)}}" >
+                    <a href="{{route('pais.edit',$p->id)}}">
                         <i class="material-icons">edit</i>
 
                     </a>
 
-                    <a  data-toggle="modal" href="#myModal{{ $m->id }}" >
+                    <a data-toggle="modal" href="#myModal{{ $p->id }}">
                         <i class="material-icons">close</i>
 
                     </a>
 
-                    <div class="modal fade modal-danger" id="myModal{{ $m->id }}" role="dialog">
+                    <div class="modal fade modal-danger" id="myModal{{ $p->id }}" role="dialog">
                         <div class="modal-dialog">
                             <div class="modal-content">
 
@@ -66,13 +73,13 @@
                                 </div>
 
                                 <div class="modal-body text-center">
-                                    <p>Realmente Deseja excluir {{$m->descricao}} ??</p>
+                                    <p>Realmente Deseja excluir {{$p->nome}} ??</p>
                                 </div>
 
                                 <div class="modal-footer">
 
-                                    <form id="formDelete{{ $m->id }}"
-                                          action="{{action('MarcaController@destroy',$m->id)}}" method="POST">
+                                    <form id="formDelete{{ $p->id }}"
+                                          action="{{action('PaisController@destroy',$p->id)}}" method="POST">
 
                                         {{ csrf_field() }}
                                         {{--{{ method_field('DELETE') }}--}}
@@ -80,7 +87,8 @@
                                         <input type="hidden" name="_method" value="DELETE">
 
                                         <button class="btn btn-danger" type="submit">Excluir</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar
+                                        </button>
 
 
                                     </form>
@@ -94,21 +102,23 @@
                     </div>
 
 
-
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
 
-    @endsection
+
+
+
+@endsection
 
 @section('scriptlocal')
 
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#tabMarcas').DataTable( {
+            $('#tabPaises').DataTable({
                 "language": {
                     "paginate": {
                         "previous": "Anterior",
@@ -122,7 +132,7 @@
                     "infoFiltered": "(Filtrado de _MAX_ registros)"
 
                 }
-            } );
+            });
 
         })
     </script>

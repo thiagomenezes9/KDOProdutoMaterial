@@ -1,25 +1,25 @@
 @extends('layouts.app')
 
 @section('htmlheader_title')
-    Marca
+    Categoria
 @endsection
 
 @section('menu_titulo')
-    Marca
+    Categoria
 @endsection
 
 @section('cardTitle')
-    Marcas
+    Categoria
 @endsection
 
 @section('cardContent')
-    Detalhes da Marca
+    Detalhes da Categoria
 @endsection
 
 @section('cardButton')
 
     <div align="right" >
-        <a href="{{route('marcas.index')}}" class="btn btn-just-icon btn-white btn-fab btn-round">
+        <a href="{{route('categorias.index')}}" class="btn btn-just-icon btn-white btn-fab btn-round">
             <i class="material-icons">arrow_back</i>
         </a>
     </div>
@@ -31,7 +31,7 @@
 
 
 
-                        <p><strong><h2>Marca : {{$marca->descricao}}</h2></strong></p><br>
+                        <p><strong><h2>Categoria : {{$categoria->descricao}}</h2></strong></p><br>
 
 
 

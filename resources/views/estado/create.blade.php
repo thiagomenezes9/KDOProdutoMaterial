@@ -1,33 +1,35 @@
 @extends('layouts.app')
 
 @section('htmlheader_title')
-    Marca
+Estados
 @endsection
 
 @section('menu_titulo')
-    Marca
+Estados
 @endsection
 
 @section('cardTitle')
-    Marcas
+Estados
 @endsection
 
 @section('cardContent')
-    Preencha todos os campos
+Preencha todos os campos
+
 @endsection
 
 @section('cardButton')
 
     <div align="right" >
-        <a href="{{route('marcas.index')}}" class="btn btn-just-icon btn-white btn-fab btn-round">
+        <a href="{{route('estados.index')}}" class="btn btn-just-icon btn-white btn-fab btn-round">
             <i class="material-icons">arrow_back</i>
         </a>
     </div>
 
+
+
 @endsection
 
 @section('content')
-
     @if($errors->any())
         <div class="box alert alert-danger">
             <div class="box-header with-border">
@@ -55,9 +57,7 @@
 
 
 
-
-
-                        <form class="form-horizontal" action="{{action('MarcaController@store')}}" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal" action="{{action('EstadoController@store')}}" method="post" enctype="multipart/form-data">
 
                             <!-- 'nome', 'sigla',
                                 'bandeira' -->
@@ -66,11 +66,34 @@
 
 
 
-                            <div class="form-group label-floating">
-                                <label for="descricao" class="control-label" >Descrição</label>
+                            <div class="form-group">
+                                <label for="nome" class="control-label" >Nome</label>
 
-                                    <input name="descricao" value="{{ old('descricao') }}" type="text" class="form-control input-lg"
-                                           id="descricao" placeholder="Informe a marca..." autofocus>
+                                    <input name="nome" value="{{ old('nome') }}" type="text" class="form-control input-lg"
+                                           id="nome" placeholder="Nome do Estado" autofocus>
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="sigla" class="control-label" >Sigla</label>
+
+                                    <input name="sigla" value="{{ old('sigla') }}" type="text" class="form-control input-lg"
+                                           id="sigla" placeholder="Sigla do Estado" autofocus>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pais" class="control-label">Pais</label>
+
+                                    <select name="pais" id="pais" class="form-control">
+                                      @foreach($pais as $p)
+                                            <option value="{{$p->id}}">{{$p->nome}}</option>
+                                        @endforeach
+                                    </select>
+
+
+
 
                             </div>
 
@@ -85,6 +108,7 @@
 
 
                         </form>
+
 
 
 @endsection

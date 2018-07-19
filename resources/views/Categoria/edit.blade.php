@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('htmlheader_title')
-    Marca
+    Categoria
 @endsection
 
 @section('menu_titulo')
-    Marca
+    Categoria
 @endsection
 
 @section('cardTitle')
-    Marcas
+    Categoria
 @endsection
 
 @section('cardContent')
@@ -19,7 +19,7 @@
 @section('cardButton')
 
     <div align="right" >
-        <a href="{{route('marcas.index')}}" class="btn btn-just-icon btn-white btn-fab btn-round">
+        <a href="{{route('categorias.index')}}" class="btn btn-just-icon btn-white btn-fab btn-round">
             <i class="material-icons">arrow_back</i>
         </a>
     </div>
@@ -27,6 +27,8 @@
 @endsection
 
 @section('content')
+
+
     @if($errors->any())
         <div class="box alert alert-danger">
             <div class="box-header with-border">
@@ -52,7 +54,7 @@
 
 
 
-                        <form class="form-horizontal" action="{{route('marcas.update',$marca->id)}}" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal" action="{{route('categorias.update',$categoria->id)}}" method="post" enctype="multipart/form-data">
 
                          <input type="hidden" name="_method" value="PUT">
 
@@ -63,7 +65,7 @@
                             <div class="form-group">
                                 <label for="descricao" class="control-label" >Descrição</label>
 
-                                    <input name="descricao" value="{{ $marca->descricao }}" type="text" class="form-control input-lg"
+                                    <input name="descricao" value="{{ $categoria->descricao }}" type="text" class="form-control input-lg"
                                            id="descricao" placeholder="Marca" autofocus>
 
                             </div>
@@ -71,7 +73,7 @@
 
 
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-info pull-right btn-lg">
+                                <button type="submit" class="btn btn-success pull-right btn-lg">
                                     Save</button>
 
                             </div>
@@ -79,6 +81,7 @@
 
 
                         </form>
+
 
 
 
