@@ -1,5 +1,8 @@
 <?php
 
+
+
+
 Route::get('/', array('as' => 'auth.index', 'uses' => 'AuthController@index'));
 
 Route::get('/home',array('as' => 'home', 'uses' => 'DashboardController@index'));
@@ -14,6 +17,8 @@ Route::group(['middleware'=>['web']],function(){
 
         Route::get('login',array('as' => 'auth.login', 'uses' => 'AuthController@login'));
         Route::post('login',array('as' => 'login.attempt', 'uses' => 'AuthController@attempt'));
+
+
 
 
         Route::get('register',array('as' => 'auth.register', 'uses' => 'AuthController@register'));
@@ -47,24 +52,28 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('listCidades/{id}', 'AjaxController@listCidades');
     Route::get('allCidades', 'AjaxController@allCidades');
 
-
-    Route::resource('pais','PaisController');
-    Route::resource('estados','EstadoController');
-    Route::resource('cidades','CidadeController');
+    Route::group(['middleware'=>'auth'],function(){
 
 
-    Route::resource('marcas','MarcaController');
-    Route::resource('categorias','CategoriaController');
-    Route::resource('segmentos','SegmentoController');
-    Route::resource('produtos','ProdutoController');
-    Route::resource('usuarios','UserController');
-    Route::resource('estabelecimentos','SupermercadoController');
-    Route::resource('sugestao','SugestaoController');
-    Route::resource('precos','PrecoController');
-    Route::resource('ofertas','OfertaController');
-    Route::resource('busca','BuscaController');
-    Route::resource('interesse','InteresseController');
-    Route::resource('acesso','AcessoController');
+
+
+        Route::resource('pais','PaisController');
+        Route::resource('estados','EstadoController');
+        Route::resource('cidades','CidadeController');
+
+
+        Route::resource('marcas','MarcaController');
+        Route::resource('categorias','CategoriaController');
+        Route::resource('segmentos','SegmentoController');
+        Route::resource('produtos','ProdutoController');
+        Route::resource('usuarios','UserController');
+        Route::resource('estabelecimentos','SupermercadoController');
+        Route::resource('sugestao','SugestaoController');
+        Route::resource('precos','PrecoController');
+        Route::resource('ofertas','OfertaController');
+        Route::resource('busca','BuscaController');
+        Route::resource('interesse','InteresseController');
+        Route::resource('acesso','AcessoController');
 
 
 
@@ -77,14 +86,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('relatorios', 'RelatorioController@exibirOpcoesRelatorio')->name('relatorios');
     Route::post('relatorioSelecionado', 'RelatorioController@index');
 
-
-
-
-
-
-
-
-
+    });
 
 
 });

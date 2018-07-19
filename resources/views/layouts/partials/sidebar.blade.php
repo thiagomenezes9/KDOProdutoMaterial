@@ -14,9 +14,13 @@
         </a>
     </div>
     <div class="sidebar-wrapper">
-        {{--  <div class="user">
+          <div class="user">
               <div class="photo">
-                  <img src="../assets/img/faces/avatar.jpg">
+                  @if(isset(Auth::user()->foto))
+                         <img src="{{Auth::user()->foto}}" alt="../assets/img/faces/avatar.jpg">
+                      @else
+
+                  @endif
               </div>
               <div class="user-info">
                   <a data-toggle="collapse" href="#collapseExample" class="username">
@@ -28,16 +32,20 @@
                   <div class="collapse" id="collapseExample">
                       <ul class="nav">
                           <li class="nav-item">
-                              <a class="nav-link" href="#">
-                                  <span class="sidebar-mini"> MP </span>
+                              <a class="nav-link" href="{{route('perfil')}}">
                                   <span class="sidebar-normal"> Meu Perfil </span>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="{{route('auth.logout')}}">
+                                  <span class="sidebar-normal"> Sair </span>
                               </a>
                           </li>
 
                       </ul>
                   </div>
               </div>
-          </div>--}}
+          </div>
         <ul class="nav">
 
             @if(Auth::user()->tipo == 'ADMIN')

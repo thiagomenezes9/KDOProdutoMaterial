@@ -64,7 +64,7 @@
                     <span class="navbar-toggler-icon icon-bar"></span>
                     <span class="navbar-toggler-icon icon-bar"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-end">
+                {{--<div class="collapse navbar-collapse justify-content-end">
                     <form class="navbar-form" action="{{route('busca.store')}}" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{{ csrf_token() }}}"/>
                         <div class="input-group no-border">
@@ -76,7 +76,7 @@
                         </div>
                     </form>
 
-                </div>
+                </div>--}}
             </div>
         </nav>
         <!-- End Navbar -->

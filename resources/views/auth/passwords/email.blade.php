@@ -57,7 +57,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <strong><h2>Looking Price</h2></strong>
+            <strong><h2>KD O Produto</h2></strong>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -86,20 +86,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-signup">
-                        <h2 class="card-title text-center">Registro</h2>
+                        <h2 class="card-title text-center">Recuperação de SenhaRe</h2>
                         <div class="row">
 
                             {{--<div class="col-md-5">--}}
                             <div class="social text-center">
-                                <button class="btn btn-just-icon btn-round btn-twitter">
-                                    <i class="fa fa-twitter"></i>
-                                </button>
-                                <button class="btn btn-just-icon btn-round btn-dribbble">
-                                    <i class="fa fa-dribbble"></i>
-                                </button>
-                                <button class="btn btn-just-icon btn-round btn-facebook">
-                                    <i class="fa fa-facebook"> </i>
-                                </button>
+
 
 
 
@@ -121,12 +113,16 @@
                                 {!! csrf_field() !!}
 
 
-                                <div class="form-group">
+                                <div class="input-group">
 
-                                    <label for="email" class="col-md-4 control-label">Email:</label>
-                                    <div class="col-md-6">
+                                    <span class="input-group-addon">
+                                                    <i class="material-icons col-md-4">email</i>
+                                                </span>
+
+
+
                                         <input type="email" name="email" class="form-control">
-                                    </div>
+
 
 
                                 </div>
