@@ -6,6 +6,7 @@ use App\Acesso;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AcessoController extends Controller
 {
@@ -18,7 +19,16 @@ class AcessoController extends Controller
     {
         $user = Auth::user();
 
-        $acessos = Acesso::all()->where('user_id','=',$user->id);
+        /**
+         * Buscar quantidade de acesso do usuario em cada produto
+         * na hora de mostrar mostro quantas vezes ele acessou
+         */
+
+        $acessos = DB::select(DB::raw("SELECT produto_id, COUNT(produto_id) AS qtd_acessos FROM acessos
+               WHERE user_id = ".$user->id."
+                GROUP BY  produto_id    ORDER BY qtd_acessos DESC" ));
+
+
 
         return view('Acesso.index',compact('acessos'));
     }

@@ -26,40 +26,34 @@
 
 
 
-            @if($acesso->user_id == Auth::user()->id)
-
-            <ul class="products-list product-list-in-box">
+                    <ul class="products-list product-list-in-box">
 
 
-                <li class="item">
-                    <div class="product-img">
-                        <img src="{{$acesso->produto->foto}}" alt="Product Image">
-                    </div>
-                    <div class="product-info">
-                        <a href="{{route('busca.show',$acesso->produto->id)}}"
-                           class="product-title">{{$acesso->produto->descricao}}
+                        <li class="item">
+                            <div class="product-img">
+                                <img src="{{\App\Produto::find($acesso->produto_id)->foto}}" alt="Product Image">
+                            </div>
+                            <div class="product-info">
+                                <a href="{{route('busca.show',$acesso->produto_id)}}"
+                                   class="product-title">{{\App\Produto::find($acesso->produto_id)->descricao}}
 
 
-                            </a>
-                        <span class="product-description">
-                                              {{$acesso->produto->marca->descricao}}
+                                </a>
+                                <span class="product-description">
+                                              {{\App\Produto::find($acesso->produto_id)->marca->descricao}}
                                              </span>
 
 
-
-
-                        <strong><span class="product-description">
-                                              Acessado em {{\Carbon\Carbon::parse($acesso->data)->format('d/m/Y')}}
+                                <strong><span class="product-description">
+                                              Numero de Acessos {{$acesso->qtd_acessos}}
                                              </span></strong>
 
 
-                    </div>
-                </li>
+                            </div>
+                        </li>
 
 
-            </ul>
-
-@endif
+                    </ul>
 
 
 
@@ -68,7 +62,8 @@
 
 
 
-        @endforeach
+            @endforeach
+
 
 
 

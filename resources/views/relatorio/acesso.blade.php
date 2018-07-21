@@ -1,7 +1,7 @@
 <div>
 
     <div style="font-size: x-large;text-align: center;">
-        <h2>Produtos Interesse</h2>
+        <h2>Produtos Acessados</h2>
     </div>
 
     <div>
@@ -22,17 +22,15 @@
 
 
 
-        @foreach($interesses as $interesse)
+        @foreach($acessos as $acesso)
 
-            @foreach($interesse as $item)
 
-                @if($loop->first)
+
                     <tr align="center">
-                        <td align="left" style="padding-right: 20em">{{$item->produto->descricao}}</td>
-                        <td align="left">{{$interesse->count()}}</td>
+                        <td align="left" style="padding-right: 20em">{{\App\Produto::find($acesso->produto_id)->descricao}}</td>
+                        <td align="left">{{$acesso->qtd_acessos}}</td>
                     </tr>
-                @endif
-                @endforeach
+
         @endforeach
             </tbody>
         </table>
