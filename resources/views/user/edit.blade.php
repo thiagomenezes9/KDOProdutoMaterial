@@ -103,7 +103,7 @@ Preencha todos os campos
 
 
 
-                                    <input placeholder="00/00/0000" name="dt_nasc" value="{{ $usuario->dt_nasc }}" type="date" class="form-control input-lg"
+                                    <input placeholder="00/00/0000" name="dt_nasc" value="{{date('Y-m-d',strtotime($usuario->dt_nasc))}}" type="date" class="form-control input-lg"
                                            id="dt_nasc">
 
                             </div>
@@ -115,8 +115,8 @@ Preencha todos os campos
 
                                     <select name="sexo" id="sexo" class="form-control">
 
-                                        <option value="Masculino">Masculino</option>
-                                        <option value="Feminino">Feminino</option>
+                                        <option value="Masculino" {{$usuario->sexo == 'Masculino' ? 'selected': '' }}>Masculino</option>
+                                        <option value="Feminino" {{$usuario->sexo == 'Feminino' ? 'selected':''}}>Feminino</option>
 
                                     </select>
 
@@ -132,7 +132,7 @@ Preencha todos os campos
                                     <select name="pais" id="pais" class="form-control">
                                         <option id="paisOp">Selecione o pais</option>
                                         @foreach($pais as $p)
-                                            <option value="{{$p->id}}">{{$p->nome}}</option>
+                                            <option value="{{$p->id}}" {{$usuario->cidade->estado->pais->id == $p->id ? 'selected':''}}>{{$p->nome}}</option>
                                         @endforeach
                                     </select>
 
@@ -143,6 +143,7 @@ Preencha todos os campos
 
                                     <select name="estados" id="estados" class="form-control" disabled>
 
+                                        <option>{{$usuario->cidade->estado->nome}}</option>
                                         <option>Selecione o pais</option>
 
                                     </select>
@@ -153,6 +154,8 @@ Preencha todos os campos
                                 <label for="cidades" class="control-label" >Cidades : </label>
 
                                     <select name="cidades" id="cidades" class="form-control" disabled>
+
+                                        <option>{{$usuario->cidade->nome}}</option>
 
                                         <option >Selecione o Estado</option>
 
@@ -195,9 +198,14 @@ Preencha todos os campos
                             <br>
                             <legend>Foto</legend>
 
-                            <div>
-                                <div>
-                                    <img id="img" style="width: 250px" src="../../assets/img/image_placeholder.jpg" alt="...">
+                            <div class="fileinput fileinput-new">
+                                <div class="fileinput-new thumbnail">
+                                    @if(isset($usuario->foto))
+
+                                        <img id="img" style="width: 150px" src="{{$usuario->foto}}" alt="../assets/img/faces/avatar.jpg">
+                                    @else
+                                        <img id="img" style="width: 150px" src="../../assets/img/default-avatar.png" alt="...">
+                                    @endif
                                 </div>
                                 <div>
                                     <br>

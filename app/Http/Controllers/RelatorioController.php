@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Interesse;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 
 class RelatorioController extends Controller
@@ -15,10 +15,7 @@ class RelatorioController extends Controller
 
         if(strcmp($request->input('relatorio'), "ProdutoInteresse")==0){
 
-            $interesses = Interesse::all();
-
-
-
+            $interesses = Interesse::all()->groupBy('produto_id');
 
             $pdf = PDF::loadView('relatorio.interesse',compact('interesses'));
 

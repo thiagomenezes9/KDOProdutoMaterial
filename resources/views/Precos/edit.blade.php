@@ -85,7 +85,7 @@
                                 <label for="valor" class="control-label" >Valor</label>
 
                                     <input name="valor" value="{{$preco->valor }}" type="text" class="form-control input-lg valor"
-                                           id="valor" placeholder="valor" autofocus></input>
+                                           id="valor" placeholder="valor" autofocus>
 
                             </div>
 

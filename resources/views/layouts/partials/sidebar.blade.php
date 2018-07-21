@@ -19,7 +19,7 @@
                   @if(isset(Auth::user()->foto))
                          <img src="{{Auth::user()->foto}}" alt="../assets/img/faces/avatar.jpg">
                       @else
-
+                      <img src="../assets/img/default-avatar.png" alt="../assets/img/faces/avatar.jpg">
                   @endif
               </div>
               <div class="user-info">
@@ -178,21 +178,21 @@
                 </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="{{route('acesso.index')}}">
-                            <i class="fa fa-heart"></i>
+                            <i class="fa fa-anchor"></i>
                             <span>Meus Acessos</span>
                             {{--<i class="fa fa-angle-left pull-right"></i>--}}
                         </a>
                     </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="{{route('dashboard')}}">
-                        <i class="fa fa-heart"></i>
+                        <i class="fa fa-balance-scale"></i>
                         <span>Ofertas</span>
                         {{--<i class="fa fa-angle-left pull-right"></i>--}}
                     </a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="{{route('perfil')}}">
-                        <i class="fa fa-users"></i>
+                        <i class="fa fa-user"></i>
                         <span>Meus Dados</span>
                         {{--<i class="fa fa-angle-left pull-right"></i>--}}
                     </a>

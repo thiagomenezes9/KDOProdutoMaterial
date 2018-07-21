@@ -1,40 +1,28 @@
 @extends('layouts.app')
 
 @section('htmlheader_title')
-    Relatórios
+    Relatorios
 @endsection
 
-@section('contentheader_title')
-    Relatórios
+@section('menu_titulo')
+    Relatorios
 @endsection
 
+@section('cardTitle')
+    Relatorios
+@endsection
 
-@section('main-content')
+@section('cardContent')
+    Relatorios
 
-    @include('erros')
+@endsection
 
-    @if (Session::has('mensagem'))
-        <div class="col-md-12">
-            <div class="box danger alert-danger">
-                <div class="box-header with-border">
-                    <h3 class="box-title" style="color:white">{{Session::get('mensagem')}}</h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool"
-                                data-widget="remove" data-toggle="tooltip" title="Fechar">
-                            <i class="fa fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
+@section('cardButton')
 
-    <div class="container-fluid spark-screen">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box">
 
-                    <div class="box-body">
+@endsection
+
+@section('content')
 
                         <form class="form-horizontal" action="{{action('RelatorioController@index')}}" method="post">
                             <input type="hidden" name="_token" value="{{{csrf_token()}}}">
@@ -42,9 +30,9 @@
                                 <legend>Selecione uma opção: </legend>
 
                                 <div class="form-group">
-                                    <label for="idTipo" class="control-label col-sm-1">Opção</label>
+                                    <label for="idTipo" class="control-label" >Opção</label>
                                     <div class="col-md-11">
-                                        <select class="form-control" name="relatorio" id="relatorio">
+                                        <select class="form-control " name="relatorio" id="relatorio">
                                             <option value="ProdutoInteresse">Produtos com Interesse</option>
                                             <option value="ProdutoAcesso">Produtos com mais acessos</option>
                                             <option value="QtdAcessoProduto">Quantidade de Acesso por produto</option>
@@ -54,14 +42,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputDtInicial" class="col-sm-1 control-label">Data Inicial</label>
+                                    <label for="inputDtInicial" >Data Inicial</label>
                                     <div class="col-sm-11">
                                         <input type="date" class="form-control input-lg" id="dataInicial" name="dataInicial"
                                                value="{{old('dataInicial')}}">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputDtFinal" class="col-sm-1 control-label">Data Final</label>
+                                    <label for="inputDtFinal" >Data Final</label>
                                     <div class="col-sm-11">
                                         <input type="date" class="form-control input-lg" id="dataFinal" name="dataFinal"
                                                value="{{old('dataFinal')}}">
@@ -97,12 +85,7 @@
 
                         </form>
 
-                    </div>
 
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 @section('scriptlocal')
     <script type="text/javascript">

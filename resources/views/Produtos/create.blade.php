@@ -119,9 +119,11 @@
         <br>
         <legend>Foto</legend>
 
-        <div>
-            <div>
-                <img id="img" style="width: 250px" src="../../assets/img/image_placeholder.jpg" alt="...">
+        <div class="fileinput fileinput-new">
+            <div class="fileinput-new thumbnail">
+
+                    <img id="img" style="width: 150px" src="../../assets/img/default-avatar.png" alt="...">
+
             </div>
             <div>
                 <br>

@@ -81,7 +81,7 @@
             <label for="valor" class="control-label">Valor</label>
 
             <input name="valor" value="{{$oferta->valor }}" type="text" class="form-control input-lg valor"
-                   id="valor" placeholder="valor" autofocus></input>
+                   id="valor" placeholder="valor" autofocus>
 
         </div>
 
@@ -90,7 +90,7 @@
             <label for="dt_ini" class="control-label">Data Inicial</label>
 
 
-            <input placeholder="00/00/0000" name="dt_ini" value="{{ $oferta->dt_ini }}" type="date"
+            <input placeholder="00/00/0000" name="dt_ini" value="{{ date('Y-m-d',strtotime($oferta->dt_ini)) }}" type="date"
                    class="form-control input-lg" min="{{\Carbon\Carbon::now()}}"
                    id="dt_ini">
 
@@ -100,7 +100,7 @@
             <label for="dt_fim" class="control-label">Data Final</label>
 
 
-            <input placeholder="00/00/0000" name="dt_fim" value="{{ $oferta->dt_fim }}" type="date"
+            <input placeholder="00/00/0000" name="dt_fim" value="{{ date('Y-m-d',strtotime($oferta->dt_fim)) }}" type="date"
                    class="form-control input-lg" min="{{\Carbon\Carbon::now()}}"
                    id="dt_fim">
 

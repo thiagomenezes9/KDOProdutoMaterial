@@ -120,9 +120,14 @@
                             <br>
                             <legend>Foto</legend>
 
-                            <div>
-                                <div>
-                                    <img id="img" style="width: 250px" src="../../assets/img/image_placeholder.jpg" alt="...">
+                            <div class="fileinput fileinput-new">
+                                <div class="fileinput-new thumbnail">
+                                    @if(isset($produto->foto))
+
+                                        <img id="img" style="width: 150px" src="{{$produto->foto}}" alt="../assets/img/faces/avatar.jpg">
+                                    @else
+                                        <img id="img" style="width: 150px" src="../../assets/img/default-avatar.png" alt="...">
+                                    @endif
                                 </div>
                                 <div>
                                     <br>
