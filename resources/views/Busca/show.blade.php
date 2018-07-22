@@ -60,6 +60,9 @@
 
 @section('content')
 
+    <div id="ajax">
+
+    </div>
 
 
 
@@ -130,7 +133,7 @@
     </table>
 @else
 
-        <form class="form-horizontal" action="{{route('aviso.store')}}" method="post" enctype="multipart/form-data" >
+        <form class="form-horizontal" action="{{route('aviso.store')}}" method="post" enctype="multipart/form-data" id="aviso">
 
 
             <input type="hidden" name="_token" value="{{{ csrf_token() }}}"/>
@@ -158,7 +161,28 @@
 
 @section('scriptlocal')
 
+    <script type="text/javascript">
 
+
+
+        jQuery( document ).ready( function( $ ) {
+
+            $('#aviso').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: {{\Illuminate\Support\Facades\URL::to('aviso.store')}},
+                    data: $(this).serialize(),
+                    success: function(msg) {
+                        alert("funciona");
+
+                    }
+                });
+            });
+        });
+
+
+        </script>
 
 
 

@@ -7,6 +7,7 @@ use App\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class AvisoController extends Controller
 {
     /**
@@ -37,6 +38,8 @@ class AvisoController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $produto = Produto::find($request->produto);
         $user = Auth::user();
         $avisos = Aviso::all()->where('produto_id','=',$produto->id)->whereIn('user_id',$user->id);
@@ -53,14 +56,27 @@ class AvisoController extends Controller
 
 
             $aviso->save();
+
+            $response = array(
+                'status' => 'success',
+                'msg' => 'Ja cadastrado',
+            );
+            return response()->json(json_encode($response));
+
         }
 
 
 
-        $id = $produto->id;
+        $response = array(
+            'status' => 'success',
+            'msg' => 'Aviso criado',
+        );
+        return response()->json(json_encode($response));  // <<<<<<<<< see this line
 
-        return redirect()->route('busca.show',compact('id'));
-    }
+}
+
+
+
 
     /**
      * Display the specified resource.
