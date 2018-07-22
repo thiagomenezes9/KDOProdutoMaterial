@@ -36,7 +36,7 @@ class AvisoNotificacao extends Mailable
      */
     public function build()
     {
-        return $this->view('notificacao.email')->with(['produto' => $this->produto , 'preco' => $this->preco])
-            ->subject('KD O Produto - Oferta');
+        return $this->view('notificacao.aviso')->with(['produto' => $this->produto , 'preco' => $this->preco])
+            ->subject('KD O Produto - Chegou');
     }
 }

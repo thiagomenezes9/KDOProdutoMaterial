@@ -60,7 +60,7 @@
 
 @section('content')
 
-    <div id="ajax">
+    <div id="ajax" class="alert alert-success">
 
     </div>
 
@@ -84,56 +84,59 @@
 
 
 
-    @if(!isset($produto->preco))
+    @if($produto->preco->count() > 0)
 
 
-    <br><br><br><br>
-    <h3><strong>Preços</strong></h3>
+        <br><br><br><br>
+        <h3><strong>Preços</strong></h3>
 
-    <table class="table table-hover" id="tabPrecos">
-        <thead>
-        <tr>
-            <th><strong>Estabelecimento</strong></th>
-            <th><strong>Valor</strong></th>
-            <th class="text-right"><strong>Preço</strong></th>
-        </tr>
-        </thead>
+        <table class="table table-hover" id="tabPrecos">
+            <thead>
+            <tr>
+                <th><strong>Estabelecimento</strong></th>
+                <th><strong>Valor</strong></th>
+                <th class="text-right"><strong>Preço</strong></th>
+            </tr>
+            </thead>
 
 
-        <tbody>
-        @foreach($produto->preco as $preco)
+            <tbody>
+            @foreach($produto->preco as $preco)
 
-            <p style="display: none">{{$numOferta = 0}}</p>
-            @foreach($produto->oferta as $oferta)
-                @if($oferta->supermercado == $preco->supermercado)
-                    @if($oferta->dt_fim >= \Carbon\Carbon::now() && $oferta->dt_ini <= \Carbon\Carbon::now())
-                        <tr style="background-color: #a3d7a5" align="center">
-                            <td align="left">{{ $oferta->supermercado->nome }}</td>
-                            <td align="center">{{ 'R$'. $oferta->valor}}</td>
-                            <td class="td-actions text-right">{{'Oferta até '.\Carbon\Carbon::parse($oferta->dt_fim)->format('d/m/Y')}}</td>
+                <p style="display: none">{{$numOferta = 0}}</p>
+                @foreach($produto->oferta as $oferta)
+                    @if($oferta->supermercado == $preco->supermercado)
+                        @if($oferta->dt_fim >= \Carbon\Carbon::now() && $oferta->dt_ini <= \Carbon\Carbon::now())
+                            <tr style="background-color: #a3d7a5" align="center">
+                                <td align="left">{{ $oferta->supermercado->nome }}</td>
+                                <td align="center">{{ 'R$'. $oferta->valor}}</td>
+                                <td class="td-actions text-right">{{'Oferta até '.\Carbon\Carbon::parse($oferta->dt_fim)->format('d/m/Y')}}</td>
 
-                        </tr>
-                        <p style="display: none">{{$numOferta = $numOferta + 1}}</p>
+                            </tr>
+                            <p style="display: none">{{$numOferta = $numOferta + 1}}</p>
+                        @endif
                     @endif
+                @endforeach
+                @if($numOferta == 0)
+
+                    <tr align="center">
+                        <td align="left"><a
+                                    href="{{route('estabelecimentos.show',$preco->supermercado->id)}}">{{ $preco->supermercado->nome }}</a>
+                        </td>
+                        <td align="center">{{ 'R$'. $preco->valor}}</td>
+                        <td class="td-actions text-right">{{'Desde de '.\Carbon\Carbon::parse($preco->created_at)->format('d/m/Y')}}</td>
+
+
+                    </tr>
+
                 @endif
             @endforeach
-            @if($numOferta == 0)
+            </tbody>
+        </table>
+    @else
 
-                <tr align="center">
-                    <td align="left">{{ $preco->supermercado->nome }}</td>
-                    <td align="center">{{ 'R$'. $preco->valor}}</td>
-                    <td class="td-actions text-right">{{'Desde de '.\Carbon\Carbon::parse($preco->created_at)->format('d/m/Y')}}</td>
-
-
-                </tr>
-
-            @endif
-        @endforeach
-        </tbody>
-    </table>
-@else
-
-        <form class="form-horizontal" action="{{route('aviso.store')}}" method="post" enctype="multipart/form-data" id="aviso">
+        <form class="form-horizontal" action="{{route('aviso.store')}}" method="post" enctype="multipart/form-data"
+              id="aviso">
 
 
             <input type="hidden" name="_token" value="{{{ csrf_token() }}}"/>
@@ -141,10 +144,10 @@
 
             <div class="box-footer">
                 <button type="submit" class="btn btn-success pull-right btn-lg">
-                    Avise-Me</button>
+                    Avise-Me
+                </button>
 
             </div>
-
 
 
         </form>
@@ -164,16 +167,18 @@
     <script type="text/javascript">
 
 
+        jQuery(document).ready(function ($) {
 
-        jQuery( document ).ready( function( $ ) {
-
-            $('#aviso').on('submit', function(e) {
+            $('#aviso').on('submit', function (e) {
                 e.preventDefault();
                 $.ajax({
                     type: "POST",
                     url: {{\Illuminate\Support\Facades\URL::to('aviso.store')}},
                     data: $(this).serialize(),
-                    success: function(msg) {
+                    success: function (msg) {
+                        $.each(JSON.parse(json), function (i, obj) {
+                            alert(obj);
+                        })
                         alert("funciona");
 
                     }
@@ -182,7 +187,7 @@
         });
 
 
-        </script>
+    </script>
 
 
 
