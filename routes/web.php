@@ -74,6 +74,7 @@ Route::group(['middleware'=>['web']],function(){
         Route::resource('busca','BuscaController');
         Route::resource('interesse','InteresseController');
         Route::resource('acesso','AcessoController');
+        Route::resource('aviso','AvisoController');
 
 
 

@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Aviso;
+use App\Mail\AvisoNotificacao;
+use App\Mail\EmailNotificacao;
 use App\Preco;
 use App\Produto;
 use App\Supermercado;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class PrecoController extends Controller
 {
@@ -102,6 +107,17 @@ class PrecoController extends Controller
         $preco->produto()->associate($produto[0]);
 
         $preco->save();
+
+
+        $avisos = Aviso::all();
+
+        foreach ($avisos as $aviso){
+            if($aviso->produto->id == $preco->produto->id){
+                $usuario = User::find($aviso->user->id);
+                Mail::to($usuario)->send(new AvisoNotificacao($aviso->produto->id,$preco->id));
+            }
+        }
+
 
         return redirect('precos');
 

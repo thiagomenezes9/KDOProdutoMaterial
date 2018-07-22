@@ -36,4 +36,8 @@ class Produto extends Model
         return $this->hasMany('App\Acesso','produto_id');
     }
 
+    public function aviso(){
+        return $this->hasMany('App\Aviso','produto_id');
+    }
+
 }

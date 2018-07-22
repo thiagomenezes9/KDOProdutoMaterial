@@ -48,6 +48,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Acesso','user_id');
     }
 
+    public function aviso(){
+        return $this->hasMany('App\Aviso','user_id');
+    }
+
 
 
     public function termo(){

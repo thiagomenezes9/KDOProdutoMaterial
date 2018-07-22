@@ -80,6 +80,10 @@
     {{-- <p><strong>Imagem : </strong></p><br>--}}
 
 
+
+    @if(!isset($produto->preco))
+
+
     <br><br><br><br>
     <h3><strong>Preços</strong></h3>
 
@@ -124,7 +128,28 @@
         @endforeach
         </tbody>
     </table>
+@else
 
+        <form class="form-horizontal" action="{{route('aviso.store')}}" method="post" enctype="multipart/form-data" >
+
+
+            <input type="hidden" name="_token" value="{{{ csrf_token() }}}"/>
+            <input type="hidden" name="produto" value="{{$produto->id}}"/>
+
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success pull-right btn-lg">
+                    Avise-Me</button>
+
+            </div>
+
+
+
+        </form>
+
+
+
+
+    @endif
 
 
 
@@ -132,6 +157,12 @@
 
 
 @section('scriptlocal')
+
+
+
+
+
+
 
 
     <script type="text/javascript">
