@@ -43,7 +43,13 @@ Detalhes do Produto
 
                             <p><strong>Imagem : </strong></p><br>
 
-                            <img src="{{$produto->foto}}" width="250px" height="250px"  id="imagem">
+                        @if($produto->foto)
+                            <img src="{{$produto->foto}}" width="250px" height="250px" id="imagem">
+                        @elseif(is_file('imgProdutos/'.$produto->cd_barras.'.jpg'))
+                            <img src="{{URL::asset('imgProdutos/'.$produto->cd_barras.'.jpg')}}"  width="250px" height="250px" id="imagem">
+                        @else
+                            <img src="{{URL::asset('assets/img/image_placeholder.jpg')}}" width="250px" height="250px" id="imagem">
+                        @endif
 
 
 

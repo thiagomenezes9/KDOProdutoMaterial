@@ -50,7 +50,7 @@ class ProdutoController extends Controller
         $this->validate($request, [
             'descricao' => 'required',
             'cd_barras' => 'required',
-            'foto' =>'required',
+
             'marca' =>'required',
             'categoria'=>'required'
 
@@ -76,13 +76,14 @@ class ProdutoController extends Controller
 
 
 
+        if($request->foto){
 
-        $arquivo = Input::file('foto');
-        $form = $request->all();
-//            $form['imagem'] = (string) Image::make($arquivo)->encode('data-url');
-        $form['foto'] = (string) Image::make($arquivo)->resize(1200,600)->encode('data-url');
-        $produto->foto = $form['foto'];
-
+            $arquivo = Input::file('foto');
+            $form = $request->all();
+    //            $form['imagem'] = (string) Image::make($arquivo)->encode('data-url');
+            $form['foto'] = (string) Image::make($arquivo)->resize(1200,600)->encode('data-url');
+            $produto->foto = $form['foto'];
+        }
         $produto->saveOrFail();
 
 

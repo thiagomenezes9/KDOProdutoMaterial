@@ -35,8 +35,8 @@
                                         <select class="form-control " name="relatorio" id="relatorio">
                                             <option value="ProdutoInteresse">Produtos com Interesse</option>
                                             <option value="ProdutoAcesso">Produtos com mais acessos</option>
-                                            <option value="QtdAcessoProduto">Quantidade de Acesso por produto</option>
-                                            <option value="QtdAcessoPeriodo">Quantidade de Acessos por periodo</option>
+
+
 
                                         </select>
                                     </div>
