@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Interesse;
+use App\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -94,7 +95,9 @@ class InteresseController extends Controller
     }
 
 
-    public function adicionar($produto){
+    public function adicionar($id){
+
+        $produto = Produto::find($id);
 
         $interesse = new Interesse();
 
@@ -103,20 +106,39 @@ class InteresseController extends Controller
 
         $interesse->save();
 
-        return redirect(url()->previous());
+        $result = "Alerta criado";
+
+
+
+
+        return response()->json(json_encode($result));
+
+        /*return redirect(url()->previous());*/
 
     }
 
     public function remover($id){
 
-        $interesse = Interesse::find($id);
+
+
+       foreach (Auth::user()->interesse as $interesse){
+           if($interesse->produto->id == $id){
+               $interesse->delete();
+               break;
+           }
+       }
 
 
 
-        $interesse->delete();
+
+        $result = "Alerta criado";
 
 
-        return redirect(url()->previous());
+
+
+        return response()->json(json_encode($result));
+
+        /*return redirect(url()->previous());*/
 
 
 

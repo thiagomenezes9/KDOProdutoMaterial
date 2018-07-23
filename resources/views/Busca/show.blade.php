@@ -24,27 +24,50 @@
     <div align="left">
         <p style="display: none">{{$valida = '0'}}</p>
 
+        <input type="hidden" id="Produto" name="Produto" value="{{$produto->id}}"/>
+
         @foreach(Auth::user()->interesse as $interesse)
 
             @if($interesse->produto == $produto)
 
                 <p style="display: none">{{$valida = '1'}}</p>
 
-                <a href="{{route('InteresseRemover',$interesse->id)}}"
+               {{-- <a href="{{route('InteresseRemover',$interesse->id)}}"
                    class="btn btn-just-icon btn-white btn-fab btn-round">
                     <i class="material-icons">close</i>
-                </a>
+                </a>--}}
 
 
+                <button id="btnRemover" class="btn btn-just-icon btn-white btn-fab btn-round">
+                    <i class="material-icons">close</i>
+                </button>
+
+
+                <button id="btnAdicionar" class="btn btn-just-icon btn-white btn-fab btn-round" hidden >
+                    <i class="material-icons">add</i>
+                </button>
+                @break;
 
             @endif
 
         @endforeach
 
         @if($valida == '0')
-            <a href="{{route('InteresseAdicionar',$produto)}}" class="btn btn-just-icon btn-white btn-fab btn-round">
+          {{--  <a href="{{route('InteresseAdicionar',$produto)}}" class="btn btn-just-icon btn-white btn-fab btn-round">
                 <i class="material-icons">add</i>
-            </a>
+            </a>--}}
+
+            <button id="btnRemover" class="btn btn-just-icon btn-white btn-fab btn-round" hidden>
+                <i class="material-icons">close</i>
+            </button>
+
+
+            <button id="btnAdicionar" class="btn btn-just-icon btn-white btn-fab btn-round" >
+                <i class="material-icons">add</i>
+            </button>
+
+
+
         @endif
 
 
@@ -60,9 +83,6 @@
 
 @section('content')
 
-    <div id="result"  class=" btn-success ">
-
-    </div>
 
 
 
@@ -173,16 +193,36 @@
 
                 var vProduto = $('#produto').val();
 
-
-
                 $.get('../../alerta/'+vProduto, function (result) {
-                    console.log(result);
-                    $('#result').html(result);
+
+                    alert('Alerta criado com sucesso');
                 })
 
 
             })
 
+            $('#btnAdicionar').click(function () {
+                var Produto = $('#Produto').val();
+                $.get('../../interesse/adicionar/'+Produto,function (result) {
+
+                    $('#btnAdicionar').attr('hidden', 'hidden');
+                    $('#btnRemover').removeAttr('hidden');
+                    alert('Interesse Adicionado');
+
+                })
+            })
+
+            $('#btnRemover').click(function () {
+
+                var Produto = $('#Produto').val();
+                $.get('../../interesse/remover/'+Produto,function (result) {
+                    $('#btnRemover').attr('hidden', 'hidden');
+                    $('#btnAdicionar').removeAttr('hidden');
+
+                    alert('Interesse Removido');
+
+                })
+            })
 
         })
     </script>
