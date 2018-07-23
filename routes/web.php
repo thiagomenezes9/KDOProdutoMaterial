@@ -52,6 +52,11 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('listCidades/{id}', 'AjaxController@listCidades');
     Route::get('allCidades', 'AjaxController@allCidades');
 
+
+
+    Route::get('alerta/{id}', 'AvisoController@criar');
+
+
     Route::group(['middleware'=>'auth'],function(){
 
 

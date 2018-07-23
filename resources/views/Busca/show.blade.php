@@ -60,7 +60,7 @@
 
 @section('content')
 
-    <div id="ajax" class="alert alert-success">
+    <div id="result"  class=" btn-success ">
 
     </div>
 
@@ -135,22 +135,17 @@
         </table>
     @else
 
-        <form class="form-horizontal" action="{{route('aviso.store')}}" method="post" enctype="multipart/form-data"
-              id="aviso">
 
 
-            <input type="hidden" name="_token" value="{{{ csrf_token() }}}"/>
-            <input type="hidden" name="produto" value="{{$produto->id}}"/>
+            <input type="hidden" id="produto" name="produto" value="{{$produto->id}}"/>
 
             <div class="box-footer">
-                <button type="submit" class="btn btn-success pull-right btn-lg">
+                <button type="submit" id="btnAviso" class="btn btn-success pull-right btn-lg">
                     Avise-Me
                 </button>
 
             </div>
 
-
-        </form>
 
 
 
@@ -164,31 +159,27 @@
 
 @section('scriptlocal')
 
+
     <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnAviso').click(function () {
 
 
-        jQuery(document).ready(function ($) {
-
-            $('#aviso').on('submit', function (e) {
-                e.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: {{\Illuminate\Support\Facades\URL::to('aviso.store')}},
-                    data: $(this).serialize(),
-                    success: function (msg) {
-                        $.each(JSON.parse(json), function (i, obj) {
-                            alert(obj);
-                        })
-                        alert("funciona");
-
-                    }
-                });
-            });
-        });
+                var vProduto = $('#produto').val();
 
 
+
+                $.get('../../alerta/'+vProduto, function (result) {
+                    console.log(result);
+                    $('#result').html(result);
+                })
+
+
+            })
+
+
+        })
     </script>
-
 
 
 

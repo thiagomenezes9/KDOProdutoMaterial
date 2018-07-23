@@ -40,40 +40,11 @@ class AvisoController extends Controller
     {
 
 
-        $produto = Produto::find($request->produto);
-        $user = Auth::user();
-        $avisos = Aviso::all()->where('produto_id','=',$produto->id)->whereIn('user_id',$user->id);
 
 
 
-        if($avisos->isEmpty()){
-            $aviso = new Aviso();
 
-
-
-            $aviso->produto()->associate($produto);
-            $aviso->user()->associate(Auth::user());
-
-
-            $aviso->save();
-
-            $response = array(
-                'status' => 'success',
-                'msg' => 'Ja cadastrado',
-            );
-            return response()->json(json_encode($response));
-
-        }
-
-
-
-        $response = array(
-            'status' => 'success',
-            'msg' => 'Aviso criado',
-        );
-        return response()->json(json_encode($response));  // <<<<<<<<< see this line
-
-}
+    }
 
 
 
@@ -121,5 +92,43 @@ class AvisoController extends Controller
     public function destroy(Aviso $aviso)
     {
         //
+    }
+
+
+    public function criar($id){
+
+
+
+        $produto = Produto::find($id);
+        $user = Auth::user();
+        $avisos = Aviso::all()->where('produto_id','=',$produto->id)->whereIn('user_id',$user->id);
+
+
+
+        if($avisos->isEmpty()){
+            $aviso = new Aviso();
+
+
+
+            $aviso->produto()->associate($produto);
+            $aviso->user()->associate(Auth::user());
+
+
+            $aviso->save();
+
+
+
+
+
+
+        }
+
+        $result = "Alerta criado";
+
+
+
+
+        return response()->json(json_encode($result));
+
     }
 }
