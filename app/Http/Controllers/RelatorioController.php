@@ -40,6 +40,22 @@ class RelatorioController extends Controller
         }
 
 
+        if(strcmp($request->input('relatorio'), "ProdutoAlerta")==0){
+
+            $alertas = DB::select(DB::raw("SELECT produto_id, COUNT(produto_id) AS qtd_alerta FROM avisos
+               
+                GROUP BY  produto_id    ORDER BY qtd_alerta DESC" ));
+
+
+
+
+            $pdf = PDF::loadView('relatorio.alerta',compact('alertas'));
+
+
+            return $pdf->stream();
+        }
+
+
        /* if(strcmp($request->input('relatorio'), "QtdAcessoPeriodo")==0){
             if(($request->input('dataInicial')==null) || ($request->input('dataFinal')) == null){
                 Session::flash('mensagem', 'Preencha os campos corretamente');

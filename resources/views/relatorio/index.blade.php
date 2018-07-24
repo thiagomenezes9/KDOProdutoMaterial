@@ -35,6 +35,7 @@
                                         <select class="form-control " name="relatorio" id="relatorio">
                                             <option value="ProdutoInteresse">Produtos com Interesse</option>
                                             <option value="ProdutoAcesso">Produtos com mais acessos</option>
+                                            <option value="ProdutoAlerta">Produtos com Alertas</option>
 
 
 
