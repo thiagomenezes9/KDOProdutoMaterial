@@ -39,12 +39,12 @@
 
 
                 <button id="btnRemover" class="btn btn-just-icon btn-white btn-fab btn-round">
-                    <i class="material-icons">close</i>
+                    <i class="material-icons">favorite</i>
                 </button>
 
 
                 <button id="btnAdicionar" class="btn btn-just-icon btn-white btn-fab btn-round" hidden >
-                    <i class="material-icons">add</i>
+                    <i class="material-icons">favorite_border</i>
                 </button>
                 @break;
 
@@ -58,12 +58,12 @@
             </a>--}}
 
             <button id="btnRemover" class="btn btn-just-icon btn-white btn-fab btn-round" hidden>
-                <i class="material-icons">close</i>
+                <i class="material-icons">favorite</i>
             </button>
 
 
             <button id="btnAdicionar" class="btn btn-just-icon btn-white btn-fab btn-round" >
-                <i class="material-icons">add</i>
+                <i class="material-icons">favorite_border</i>
             </button>
 
 

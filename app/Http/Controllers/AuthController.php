@@ -69,7 +69,6 @@ class AuthController extends Controller
             'password'=>['required','min:6','max:255','confirmed'],
             'name'=>['required','max:255'],
             'telefone'=>['required','max:12'],
-            'cpf'=>['required','max:18'],
             'cidade_id'=>'required'
 
         ]);

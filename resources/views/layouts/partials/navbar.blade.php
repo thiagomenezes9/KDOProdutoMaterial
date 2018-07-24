@@ -30,14 +30,25 @@
             </form>
             <ul class="navbar-nav">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('perfil')}}">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="material-icons">person</i>
+
                         <p class="d-lg-none d-md-block">
-                            Account
+                            Some Actions
                         </p>
-                    </a>
+                        <div class="ripple-container"></div></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{route('perfil')}}">
+                        <i class="material-icons">face</i>Perfil</a>
+                        <a class="dropdown-item" href="{{route('auth.logout')}}">
+                            <i class="material-icons">exit_to_app</i>Sair</a>
+
+                    </div>
                 </li>
+
+
             </ul>
         </div>
     </div>

@@ -143,7 +143,7 @@
                                         <input type="tel" value="{{old('telefone')}}" class="form-control" placeholder="Telefone..." name="telefone">
                                     </div>
 
-                                    <div class="input-group">
+                                   {{-- <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <i class="material-icons">fingerprint</i>
                                                 </span>
@@ -155,7 +155,7 @@
                                                     <i class="material-icons">child_friendly</i>
                                                 </span>
                                         <input type="date" value="{{old('dt_nasc')}}" class="form-control" placeholder="Data Nascimento..." name="dt_nasc">
-                                    </div>
+                                    </div>--}}
 
 
                                     <div class="input-group">

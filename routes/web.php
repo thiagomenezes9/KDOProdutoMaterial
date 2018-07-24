@@ -25,7 +25,7 @@ Route::group(['middleware'=>['web']],function(){
         Route::post('register',array('as' => 'register.create', 'uses' => 'AuthController@create'));
 
 
-        Route::post('logout',array('as'=>'auth.logout', 'uses'=>'AuthController@logout'));
+        Route::get('logout',array('as'=>'auth.logout', 'uses'=>'AuthController@logout'));
 
 
 

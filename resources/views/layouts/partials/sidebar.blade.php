@@ -178,8 +178,8 @@
                 </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="{{route('acesso.index')}}">
-                            <i class="fa fa-anchor"></i>
-                            <span>Meus Acessos</span>
+                            <i class="fa fa-search"></i>
+                            <span>Minhas Buscas</span>
                             {{--<i class="fa fa-angle-left pull-right"></i>--}}
                         </a>
                     </li>
