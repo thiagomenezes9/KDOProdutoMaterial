@@ -31,7 +31,13 @@
 
                 <li class="item">
                     <div class="product-img">
-                        <img src="{{$oferta->produto->foto}}" alt="Product Image">
+                        @if($oferta->produto->foto)
+                            <img src="{{$oferta->produto->foto}}" width="250px" height="250px" id="imagem">
+                        @elseif(is_file('imgProdutos/'.$oferta->produto->cd_barras.'.jpg'))
+                            <img src="{{URL::asset('imgProdutos/'.$oferta->produto->cd_barras.'.jpg')}}"  width="250px" height="250px" id="imagem">
+                        @else
+                            <img src="{{URL::asset('assets/img/image_placeholder.jpg')}}" width="250px" height="250px" id="imagem">
+                        @endif
                     </div>
                     <div class="product-info">
                         <a href="{{route('busca.show',$oferta->produto->id)}}"

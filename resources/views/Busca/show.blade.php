@@ -110,10 +110,10 @@
 
 
 
-    @if($produto->preco->count() > 0)
+    @if($produto->preco->count() > 0 || $produto->oferta->count() > 0)
 
 
-        <br><br><br><br>
+        <br><br><br>
         <h3><strong>Preços</strong></h3>
 
         <table class="table table-hover" id="tabPrecos">
@@ -134,7 +134,7 @@
                     @if($oferta->supermercado == $preco->supermercado)
                         @if($oferta->dt_fim >= \Carbon\Carbon::now() && $oferta->dt_ini <= \Carbon\Carbon::now())
                             <tr style="background-color: #a3d7a5" align="center">
-                                <td align="left">{{ $oferta->supermercado->nome }}</td>
+                                <td align="left"><a href="{{route('estabelecimentos.show',$oferta->supermercado->id)}}">{{ $oferta->supermercado->nome }}</a></td>
                                 <td align="center">{{ 'R$'. $oferta->valor}}</td>
                                 <td class="td-actions text-right">{{'Oferta até '.\Carbon\Carbon::parse($oferta->dt_fim)->format('d/m/Y')}}</td>
 

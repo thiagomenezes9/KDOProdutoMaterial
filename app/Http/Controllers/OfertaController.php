@@ -79,6 +79,7 @@ class OfertaController extends Controller
 
 
 
+
         $ofertas = Oferta::all();
 
 
@@ -88,7 +89,7 @@ class OfertaController extends Controller
         foreach ($ofertas as $ofer) {
 
             if ($ofer->supermercado->id == $supermercado->id) {
-                if ($ofer->produto->id == $produto->id) {
+                if ($ofer->produto->id == $produto[0]->id) {
                     if ($request->dt_ini < $ofer->dt_fim) {
                         $ofer->delete();
                     }
