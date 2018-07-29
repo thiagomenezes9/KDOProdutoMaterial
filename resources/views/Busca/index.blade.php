@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.buscaIndex')
 
 @section('htmlheader_title')
 Busca
@@ -97,10 +97,10 @@ Listagem dos produtos encontrados
 
 
 
-                                <ul class="products-list product-list-in-box">
+                                <ul class="products-list product-list-in-box" id="listProdutos">
 
 
-                                    <li class="item">
+                                    <li class="item" id="m{{$produto->marca->id}}">
                                         <div class="product-img">
                                             @if($produto->foto)
                                                 <img src="{{$produto->foto}}" width="250px" height="250px" id="imagem">
@@ -135,6 +135,8 @@ Listagem dos produtos encontrados
 
 
 
+
+
                             {{--@endif--}}
 
 
@@ -147,7 +149,79 @@ Listagem dos produtos encontrados
 
 
 
-
+                    {{$produtos->appends(array('termo' => $termo))->render()}}
 
 
 @endsection
+
+
+@section('filtro')
+
+
+    <div class="form-group">
+        <label for="marca" class="control-label" >Marca : </label>
+
+        <select name="marca" id="marca" class="form-control">
+            <option id="marcaOp">Marca...</option>
+            @foreach($marcas as $marca)
+                <option value="{{$marca->id}}">{{$marca->descricao}}</option>
+            @endforeach
+        </select>
+
+    </div>
+
+    <div class="form-group">
+        <label for="categoria" class="control-label" >Categoria : </label>
+
+        <select name="categoria" id="categoria" class="form-control">
+            <option id="categoriaOp">Categoria...</option>
+            @foreach($categorias as $categoria)
+                <option value="{{$categoria->id}}">{{$categoria->descricao}}</option>
+            @endforeach
+
+        </select>
+
+    </div>
+
+
+@endsection
+
+@section('scriptlocal')
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#pais').click(function () {
+                $.ajax({
+                    url:'../../listEstados/'+$('#pais').val(),
+                    type:'GET',
+                    dataType:'json',
+                    success: function (json) {
+                        $('#estados').find('option').remove();
+                        $('#cidades').find('option').remove();
+                        $('#estados').removeAttr('disabled');
+                        $('#pais').find('#paisOp').remove();
+                        $.each(JSON.parse(json), function (i, obj) {
+                            $('#estados').append($('<option>').text(obj.nome).attr('value', obj.id));
+                        })
+                    }
+                })
+            })
+
+            $('#estados').click(function () {
+                $.ajax({
+                    url:'../../listCidades/'+$('#estados').val(),
+                    type:'GET',
+                    dataType:'json',
+                    success: function (json) {
+                        $('#cidades').find('option').remove();
+                        $('#cidades').removeAttr('disabled');
+                        $.each(JSON.parse(json), function (i, obj) {
+                            $('#cidades').append($('<option>').text(obj.nome).attr('value', obj.id));
+                        })
+                    }
+                })
+            })
+        })
+    </script>
+    @endsection

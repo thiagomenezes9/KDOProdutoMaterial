@@ -82,6 +82,8 @@ Route::group(['middleware'=>['web']],function(){
         Route::resource('aviso','AvisoController');
 
 
+        Route::get('busca','BuscaController@busca')->name('BuscaPersonal');
+
 
 
     Route::get('interesse/remover/{id}','InteresseController@remover')->name('InteresseRemover');
