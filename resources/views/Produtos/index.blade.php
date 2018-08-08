@@ -110,6 +110,9 @@ Listagem dos Produtos
                         </table>
 
 
+    {{$produtos->links()}}
+
+
 
 @endsection
 

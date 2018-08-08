@@ -150,9 +150,15 @@ class BuscaController extends Controller
 
         $termo = Input::get('termo');
 
+        if(Input::get('categoria')){
+            dd('foi categoria');
+        }
+        if(Input::get('marca')){
+            dd('foi a marca');
+        }
 
 
-
+   
 
         $usuario = Auth::user();
 
@@ -177,23 +183,6 @@ class BuscaController extends Controller
         $categorias = DB::select(DB::raw("SELECT DISTINCT categoria.id AS id, categoria.descricao as descricao 
                     FROM categorias as categoria inner join produtos as produto on (produto.categoria_id = categoria.id) 
                     WHERE produto.descricao like '%".$termo."%'"));
-
-
-
-
-        //Quando buscar, trazer todos os produtos com a descrção, todos os produtos da marca,
-        // somente dos estabeleciimentos da cidade do usuario
-
-
-
-
-        /*$pesquisa = Produtos::where('erp_status', 'like', '%'.$status.'%')
-            ->orWhere('erp_cost','like','%'.$texto.'%')
-            ->orWhere('erp_productid','like','%'.$texto.'%')
-            ->orWhereHas('descricao', function ($query) use ($texto) {
-                $query->where('erp_name', 'like', '%'.$texto.'%');
-            })
-            ->orderBy('erp_status')*/
 
 
 
