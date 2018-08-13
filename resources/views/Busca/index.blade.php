@@ -26,6 +26,10 @@
 
 
 
+    <div id="conteudo">
+
+
+
     @forelse($produtos as $produto)
 
 
@@ -91,10 +95,10 @@
 
 
 
-        <ul class="products-list product-list-in-box" id="listProdutos">
+        <ul class="products-list product-list-in-box" >
 
 
-            <li class="item" id="m{{$produto->marca->id}}">
+            <li class="item">
                 <div class="product-img">
                     @if($produto->foto)
                         <img src="{{$produto->foto}}" width="250px" height="250px" id="imagem">
@@ -129,6 +133,8 @@
 
 
 
+
+
     @empty
 
         <h3>Nenhum produto encontrado</h3>
@@ -138,6 +144,7 @@
 
 
     {{$produtos->appends(array('termo' => $termo))->render()}}
+        </div>
 
 
 @endsection
@@ -172,19 +179,11 @@
     <div class="radio">
 
 
-        <label>Categoria : </label><br>
 
 
-        @if(count($categorias) === 1)
-            @foreach($categorias as $categoria)
 
-                <label>
-                    <input type="radio" name="rdCategoria" id="rdCategoria" value="{{$categoria->id}}" checked>
-                    {{$categoria->descricao}}
-                </label>
-                <br>
-            @endforeach
-        @else
+        @if(count($categorias) !== 1)
+            <label>Categoria : </label><br>
             @foreach($categorias as $categoria)
 
                 <label>
@@ -193,6 +192,7 @@
                 </label>
                 <br>
             @endforeach
+
 
         @endif
 
@@ -209,30 +209,126 @@
         $(document).ready(function () {
 
             var $radiosMarca = $('input[name="rdMarca"]');
-            var $radiosCategoria = $('input[name="rdCategoria"]');
+
+
+
 
             $radiosMarca.change(function () {
                 var marca = $("input[name='rdMarca']:checked").val();
-                var termo = $('termo');
+                var termo = queryString("termo");
+
+                $('#conteudo').empty();
+
                 $.ajax({
+                    url: '../../buscamarca/' + marca,
                     type: 'GET',
-                    url: "/busca",
-                    data : {
-                        "termo" : termo,
-                        "marca" : marca
+                    dataType: 'json',
+                    data : {termo:termo},
+                    success: function (json) {
 
-                    }
+                    $.each(JSON.parse(json), function (i, obj) {
+                        var html_code = "<ul class='products-list product-list-in-box' >" ;
 
+                        html_code+= "<li class='item'>";
+
+                        html_code+= "<div class='product-img'>";
+                        html_code+= "<img src='' width='250px' height='250px' id='"+obj.cdBarras+"'> </div>"
+
+
+
+                        html_code+=  "                <div class='product-info'>";
+                        html_code+="                    <a href='http://www.kdoproduto.com.br/busca/"+obj.id+"' class='product-title'> "+obj.descricao ;
+                        html_code+= "                        <span id='menor"+obj.id+"' class='label label-success pull-right'>Menor valor R$   </span></a>" ;
+                        html_code+="                    <span class='product-description'>\n" ;
+                        html_code+="     "+obj.descmarca+"" ;
+                        html_code+="                                             </span>" ;
+                        html_code+="                    <strong><span id='qtd"+obj.id+"' class='product-description'>Produto em Estabelecimentos</span></strong>" ;
+                        html_code+="                </div>" ;
+                        html_code+="            </li>" ;
+                        html_code+="        </ul>";
+
+
+
+                        $('#conteudo').append(html_code);
+                        is_img(obj.cdBarras);
+                        menorValor(obj.id);
+                    });
+
+                }
                 })
-            });
 
 
-            $radiosCategoria.change(function () {
-                var categoria = $("input[name='rdCategoria']:checked").val();
-                alert("Selecionou categoria " + categoria);
+
             });
 
 
         });
+
+
+
+
+
+        function menorValor(id) {
+            $.ajax({
+                url: '../../menorValor/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (json) {
+
+                    $.each(JSON.parse(json), function (i, obj) {
+                        $('#qtd'+id).text('Produto em '+obj.qtd+' Estabelecimentos');
+                        if(obj.menor === null){
+                            $('#menor'+id).text('Menor Valor R$ 0');
+
+
+                        }else{
+                            $('#menor'+id).text('Menor Valor R$'+obj.menor);
+
+                        }
+
+
+                    });
+                }
+            });
+        }
+
+
+
+        function is_img(cdBarras) {
+            var img = document.createElement('img');
+            img.src = "http://www.kdoproduto.com.br/imgProdutos/"+cdBarras+".jpg";
+
+            img.onload = function() {
+
+                $('#'+cdBarras).attr("src","http://www.kdoproduto.com.br/imgProdutos/"+cdBarras+".jpg")
+
+
+            }
+            img.onerror = function() {
+                $('#'+cdBarras).attr("src","http://www.kdoproduto.com.br/assets/img/image_placeholder.jpg")
+
+            }
+
+        }
+
+
+
+        function queryString(parameter) {
+            var loc = location.search.substring(1, location.search.length);
+            var param_value = false;
+            var params = loc.split("&");
+            for (i=0; i<params.length;i++) {
+                param_name = params[i].substring(0,params[i].indexOf('='));
+                if (param_name == parameter) {
+                    param_value = params[i].substring(params[i].indexOf('=')+1)
+                }
+            }
+            if (param_value) {
+                return param_value;
+            }
+            else {
+                return false;
+            }
+        }
     </script>
 @endsection

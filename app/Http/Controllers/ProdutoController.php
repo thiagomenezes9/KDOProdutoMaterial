@@ -20,7 +20,7 @@ class ProdutoController extends Controller
     public function index()
     {
         if(Auth::user()->tipo == 'ADMIN'){
-            $produtos = Produto::all()->paginate(50);
+            $produtos = Produto::paginate(50);
             return view('Produtos.index',compact('produtos'));
         }
 

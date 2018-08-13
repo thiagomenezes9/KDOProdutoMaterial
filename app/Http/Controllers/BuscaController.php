@@ -190,4 +190,26 @@ class BuscaController extends Controller
         return view('Busca.index',compact('produtos','marcas','categorias','termo'));
 
     }
+
+
+    public function listmarca($id){
+
+        $termo = Input::get('termo');
+
+
+
+        $produtos = DB::select(DB::raw(" select p.id as id,p.cd_barras as cdBarras, p.descricao as descricao, m.descricao as descmarca, m.id as idmarca, c.descricao as desccategoria, c.id as idcategoria 
+          from produtos as p inner join marcas as m on (m.id = p.marca_id) INNER join categorias as c on (c.id = p.categoria_id) 
+          where p.marca_id = ".$id." and p.descricao LIKE '%".$termo."%'" ));
+
+
+        return response()->json(json_encode($produtos));
+
+    }
+
+    public function menorValor($id){
+        $valor = DB::select(DB::raw("select MIN(valor) as menor, count(valor) as qtd from precos where produto_id = ".$id));
+        return response()->json(json_encode($valor));
+    }
+
 }

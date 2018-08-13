@@ -89,7 +89,13 @@ Lista dos produtos com Interesse
                             <ul class="products-list product-list-in-box">
                                 <li class="item">
                                     <div class="product-img">
-                                        <img src="{{$interesse->produto->foto}}" alt="Product Image">
+                                        @if($interesse->produto->foto)
+                                            <img src="{{$interesse->produto->foto}}" width="250px" height="250px" id="imagem">
+                                        @elseif(is_file('imgProdutos/'.$interesse->produto->cd_barras.'.jpg'))
+                                            <img src="{{URL::asset('imgProdutos/'.$interesse->produto->cd_barras.'.jpg')}}"  width="250px" height="250px" id="imagem">
+                                        @else
+                                            <img src="{{URL::asset('assets/img/image_placeholder.jpg')}}" width="250px" height="250px" id="imagem">
+                                        @endif
                                     </div>
                                     <div class="product-info">
                                         <a href="{{route('busca.show',$interesse->produto->id)}}"

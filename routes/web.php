@@ -83,6 +83,9 @@ Route::group(['middleware'=>['web']],function(){
 
 
         Route::get('busca','BuscaController@busca')->name('BuscaPersonal');
+        Route::get('buscamarca/{id}', 'BuscaController@listmarca');
+        Route::get('buscacategoria/{id}', 'BuscaController@listcategoria');
+        Route::get('menorValor/{id}', 'BuscaController@menorValor');
 
 
 
