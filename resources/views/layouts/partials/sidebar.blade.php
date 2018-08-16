@@ -135,6 +135,13 @@
                     </a>
 
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{route('campanhas')}}">
+                        <i class="fa fa-file-pdf-o"></i>
+                        <span>Campanhas</span>
+                        {{--<i class="fa fa-angle-left pull-right"></i>--}}
+                    </a>
+                </li>
             @endif
 
 
@@ -167,6 +174,13 @@
                         {{--<i class="fa fa-angle-left pull-right"></i>--}}
                     </a>
                 </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{route('campanhas')}}">
+                            <i class="fa fa-file-pdf-o"></i>
+                            <span>Campanhas</span>
+                            {{--<i class="fa fa-angle-left pull-right"></i>--}}
+                        </a>
+                    </li>
             @endif
             @if(Auth::user()->tipo == 'USER')
                 <li class="nav-item ">

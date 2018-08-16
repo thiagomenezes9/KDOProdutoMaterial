@@ -200,7 +200,7 @@ class BuscaController extends Controller
 
         $produtos = DB::select(DB::raw(" select p.id as id,p.cd_barras as cdBarras, p.descricao as descricao, m.descricao as descmarca, m.id as idmarca, c.descricao as desccategoria, c.id as idcategoria 
           from produtos as p inner join marcas as m on (m.id = p.marca_id) INNER join categorias as c on (c.id = p.categoria_id) 
-          where p.marca_id = ".$id." and p.descricao LIKE '%".$termo."%'" ));
+          where p.marca_id = ".$id." and p.descricao LIKE '%".$termo."%' LIMIT 100" ));
 
 
         return response()->json(json_encode($produtos));

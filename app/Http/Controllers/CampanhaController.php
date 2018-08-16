@@ -3,54 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Interesse;
+use App\Mail\CampanhaNotificacao;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CampanhaController extends Controller
 {
+
+    public function campanha(){
+
+        return view('campanha.index');
+    }
+
+
     public function index(Request $request){
 
 
-        if(strcmp($request->input('campanha'), "")==0){
-
-            $interesses = Interesse::all()->groupBy('produto_id');
-
-            $pdf = PDF::loadView('relatorio.interesse',compact('interesses'));
+        if(strcmp($request->input('campanha'), "all")==0){
 
 
-            return $pdf->stream();
+            $usuarios = User::all();
+
+            $titulo = $request->titulo;
+            $conteudo = $request->conteudo;
+
+
+            foreach ($usuarios as $usuario){
+                Mail::to($usuario)->send(new CampanhaNotificacao($titulo, $conteudo));
+            }
+
+            return redirect('campanhas')->with('mensagem','Campanha enviada');
         }
 
-        if(strcmp($request->input('relatorio'), "ProdutoAcesso")==0){
+        if(strcmp($request->input('campanha'), "allHomem")==0){
 
-            $acessos = DB::select(DB::raw("SELECT produto_id, COUNT(produto_id) AS qtd_acessos FROM acessos
-               
-                GROUP BY  produto_id    ORDER BY qtd_acessos DESC" ));
-
-
-
-
-            $pdf = PDF::loadView('relatorio.acesso',compact('acessos'));
-
-
-            return $pdf->stream();
         }
-
-
-        if(strcmp($request->input('relatorio'), "ProdutoAlerta")==0){
-
-            $alertas = DB::select(DB::raw("SELECT produto_id, COUNT(produto_id) AS qtd_alerta FROM avisos
-               
-                GROUP BY  produto_id    ORDER BY qtd_alerta DESC" ));
-
-
-
-
-            $pdf = PDF::loadView('relatorio.alerta',compact('alertas'));
-
-
-            return $pdf->stream();
-        }
-
 
 
 

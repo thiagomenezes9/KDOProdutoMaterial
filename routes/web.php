@@ -97,6 +97,10 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('relatorios', 'RelatorioController@exibirOpcoesRelatorio')->name('relatorios');
     Route::post('relatorioSelecionado', 'RelatorioController@index');
 
+
+        Route::get('campanhas', 'CampanhaController@campanha')->name('campanhas');
+        Route::post('campanhaSelecionado', 'CampanhaController@index');
+
     });
 
 
