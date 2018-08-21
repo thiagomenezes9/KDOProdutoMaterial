@@ -95,7 +95,7 @@
 
 
 
-        <ul class="products-list product-list-in-box" >
+        <ul class="products-list product-list-in-box" id="{{$produto->id}}">
 
 
             <li class="item">
@@ -157,7 +157,7 @@
 
     <div class="radio">
 
-        <label>Marca : </label><br>
+        <label><strong>Marca : </strong></label><br>
 
         @foreach($marcas as $marca)
 
@@ -200,12 +200,56 @@
     </div>
 
 
-@endsection
+    <div class="radio">
+        <label><strong>Produtos</strong></label>
+        <button class="btn btn-round btn-sm btn-success" id="btnPreco" onclick="sopreco()">Com Preço</button>
+
+    </div>
+
+
+    @endsection
 
 @section('scriptlocal')
 
 
     <script type="text/javascript">
+
+        $( "button" ).click(function() {
+            $(".products-list").each(function () {
+                semPreco(this.id);
+            })
+
+
+        });
+
+
+        function semPreco(id) {
+            $.ajax({
+                url: '../../menorValor/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (json) {
+
+                    $.each(JSON.parse(json), function (i, obj) {
+
+                        if(obj.menor === null){
+                           $('#'+id).remove();
+
+
+                        }
+
+
+                    });
+                }
+            });
+        }
+
+
+
+
+
+
+
         $(document).ready(function () {
 
             var $radiosMarca = $('input[name="rdMarca"]');
@@ -227,7 +271,7 @@
                     success: function (json) {
 
                     $.each(JSON.parse(json), function (i, obj) {
-                        var html_code = "<ul class='products-list product-list-in-box' >" ;
+                        var html_code = "<ul class='products-list product-list-in-box' id='"+obj.id+"' >" ;
 
                         html_code+= "<li class='item'>";
 
@@ -267,6 +311,9 @@
 
 
 
+
+        
+        
 
         function menorValor(id) {
             $.ajax({
